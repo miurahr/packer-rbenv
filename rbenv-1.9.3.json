@@ -1,0 +1,29 @@
+{
+  "builders": [
+    {
+        "type": "docker",
+        "image": "ubuntu:14.04.2",
+        "commit": true,
+        "pull": true
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/setup-rbenv-1.9.3-base.sh",
+      ]
+    }
+  ],
+
+  "post-processors": [
+    {
+    "type": "docker-tag",
+    "only": ["docker"],
+    "repository": "miurahr/rbenv",
+    "tag": "1.9.3-p535"
+    }
+  ]
+
+}
