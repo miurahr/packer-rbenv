@@ -1,6 +1,6 @@
 {
   "variables": {
-    "ruby_version": "1.9.3-p551"
+    "ruby_version": "2.0.0-p643"
   },
 
   "builders": [

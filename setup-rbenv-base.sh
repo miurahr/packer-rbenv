@@ -1,6 +1,10 @@
 #! /bin/bash
 set -e
 
+if [ "RUBY_VERSION" == "" ]; then
+  RUBY_VERSION=1.9.3-p551
+fi
+
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
@@ -33,8 +37,14 @@ pushd /tmp
 popd
 
 # install ruby
-rbenv install 1.9.3-p551
-rbenv global 1.9.3-p551
+rbenv install $RUBY_VERSION
+rbenv global $RUBY_VERSION
 
+# Rehash:
+rbenv rehash
+
+ruby -v
 gem update --system
+gem -v
 gem install bundler --no-rdoc --no-ri
+bundle -v
