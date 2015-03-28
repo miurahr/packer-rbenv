@@ -1,9 +1,11 @@
 #! /bin/bash
 set -e
 
-if [ "RUBY_VERSION" == "" ]; then
-  RUBY_VERSION=1.9.3-p551
+if [ "RUBY_VER" == "" ]; then
+  RUBY_VER=1.9.3-p551
 fi
+
+echo "setup rbenv with Ruby ${RUBY_VER}."
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -37,8 +39,8 @@ pushd /tmp
 popd
 
 # install ruby
-rbenv install $RUBY_VERSION
-rbenv global $RUBY_VERSION
+rbenv install ${RUBY_VER}
+rbenv global ${RUBY_VER}
 
 # Rehash:
 rbenv rehash

@@ -16,9 +16,7 @@
     {
       "type": "shell",
       "environment_vars": [ "RUBY_VER={{ user `ruby_version`}}" ],
-      "scripts": [
-        "scripts/setup-rbenv-base.sh",
-      ]
+      "script":  "setup-rbenv-base.sh"
     }
   ],
 
