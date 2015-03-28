@@ -18,6 +18,20 @@ apt-get -y install \
   gcc \
   g++ \
   make
+apt-get -y install \
+  bison \
+  libgdbm-dev \
+  libncursesw5-dev \
+  libncurses5-dev \
+  libreadline6-dev \
+  tcl8.5-dev \
+  tk8.5-dev \
+  zlib1g-dev \
+  libssl-dev \
+  procps \
+  libffi-dev \
+  libyaml-dev \
+  chrpath
 apt-get clean
 
 git clone https://github.com/sstephenson/rbenv.git /opt/rbenv
@@ -50,3 +64,19 @@ gem update --system
 gem -v
 gem install bundler --no-rdoc --no-ri
 bundle -v
+
+apt-get -y remove \
+  bison \
+  libgdbm-dev \
+  libncursesw5-dev \
+  libncurses5-dev \
+  libreadline6-dev \
+  tcl8.5-dev \
+  tk8.5-dev \
+  zlib1g-dev \
+  libssl-dev \
+  libffi-dev \
+  libyaml-dev \
+  chrpath
+
+apt-get -y autoremove
