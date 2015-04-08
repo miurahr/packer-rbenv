@@ -8,7 +8,7 @@ fi
 echo "setup rbenv with Ruby ${RUBY_VER}."
 
 env DEBIAN_FRONTEND=noninteractive apt-get update
-env DEBIAN_FRONTEND=noninteractiv eapt-get -y install \
+env DEBIAN_FRONTEND=noninteractiv apt-get -y install \
   build-essential \
   curl \
   unzip \
