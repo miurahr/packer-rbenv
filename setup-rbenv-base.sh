@@ -7,10 +7,8 @@ fi
 
 echo "setup rbenv with Ruby ${RUBY_VER}."
 
-export DEBIAN_FRONTEND=noninteractive
-
-apt-get update
-apt-get -y install \
+env DEBIAN_FRONTEND=noninteractive apt-get update
+env DEBIAN_FRONTEND=noninteractiv eapt-get -y install \
   build-essential \
   curl \
   unzip \
@@ -18,7 +16,7 @@ apt-get -y install \
   gcc \
   g++ \
   make
-apt-get -y install \
+env DEBIAN_FRONTEND=noninteractive apt-get -y install \
   bison \
   libgdbm-dev \
   libncursesw5-dev \
@@ -32,7 +30,7 @@ apt-get -y install \
   libffi-dev \
   libyaml-dev \
   chrpath
-apt-get clean
+env DEBIAN_FRONTEND=noninteractive apt-get clean
 
 git clone https://github.com/sstephenson/rbenv.git /opt/rbenv
 
