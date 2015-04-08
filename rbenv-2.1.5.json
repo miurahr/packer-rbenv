@@ -1,0 +1,32 @@
+{
+  "variables": {
+    "ruby_version": "2.1.5"
+  },
+
+  "builders": [
+    {
+        "type": "docker",
+        "image": "ubuntu:14.04.2",
+        "commit": true,
+        "pull": true
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "environment_vars": [ "RUBY_VER={{ user `ruby_version`}}" ],
+      "script":  "setup-rbenv-base.sh"
+    }
+  ],
+
+  "post-processors": [
+    {
+    "type": "docker-tag",
+    "only": ["docker"],
+    "repository": "miurahr/rbenv",
+    "tag": "{{ user `ruby_version`}}"
+    }
+  ]
+
+}
