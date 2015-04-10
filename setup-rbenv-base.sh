@@ -26,6 +26,9 @@ else
   echo "default version is ${RUBY_VER}."
 fi
 
+##########################################
+# dependencies
+#
 env DEBIAN_FRONTEND=noninteractive apt-get update
 env DEBIAN_FRONTEND=noninteractiv apt-get -y install \
   build-essential \
@@ -34,8 +37,7 @@ env DEBIAN_FRONTEND=noninteractiv apt-get -y install \
   git-core \
   gcc \
   g++ \
-  make
-env DEBIAN_FRONTEND=noninteractive apt-get -y install \
+  make \
   bison \
   libgdbm-dev \
   libncursesw5-dev \
@@ -49,8 +51,10 @@ env DEBIAN_FRONTEND=noninteractive apt-get -y install \
   libffi-dev \
   libyaml-dev \
   chrpath
-env DEBIAN_FRONTEND=noninteractive apt-get clean
 
+##########################################
+# install rbenv
+#
 git clone https://github.com/sstephenson/rbenv.git /opt/rbenv
 
 # Add rbenv to the path:
@@ -62,6 +66,7 @@ echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
 chmod +x /etc/profile.d/rbenv.sh
 source /etc/profile.d/rbenv.sh
 
+##########################################
 # Install ruby-build:
 pushd /tmp
   git clone git://github.com/sstephenson/ruby-build.git
@@ -69,24 +74,51 @@ pushd /tmp
   ./install.sh
 popd
 
+##########################################
 # install ruby versions
-if [ "${RUBY_VERS}" == "" ]; then
-  rbenv install ${RUBY_VER}
+#
+# function to install ruby version $ver, gem and bundler
+# gem and bundler will be installed in global directory.
+#
+install_ruby_version () {
+  local ver=$1
+
+  rbenv install $ver
+  rbenv global $ver
   gem update --system
   gem install bundler --no-rdoc --no-ri
+}
+
+# install ruby versions
+if [ "${RUBY_VERS}" == "" ]; then
+  # single version install
+  install_ruby_version ${RUBY_VER}
 else
+  # install ruby versions in ${RUBY_VERS} list
   for v in ${RUBY_VERS} ; do
-    rbenv install $v
-    gem update --system
-    gem install bundler --no-rdoc --no-ri
+    install_ruby_version $v
   done
 fi
+
+# set default version: ${RUBY_VER}
 rbenv global ${RUBY_VER}
 
 # Rehash:
 rbenv rehash
 
-apt-get -y remove \
+
+############################################
+# plugins
+#
+# rbenv-sudo
+mkdir /opt/rbenv/plugins
+git clone git://github.com/dcarley/rbenv-sudo.git /opt/rbenv/plugins/rbenv-sudo
+
+
+###########################################
+# cleanup
+#
+env DEBIAN_FRONTEND=noninteractive apt-get -y remove \
   bison \
   libgdbm-dev \
   libncursesw5-dev \
@@ -100,4 +132,5 @@ apt-get -y remove \
   libyaml-dev \
   chrpath
 
-apt-get -y autoremove
+env DEBIAN_FRONTEND=noninteractive apt-get clean
+env DEBIAN_FRONTEND=noninteractive apt-get -y autoremove
