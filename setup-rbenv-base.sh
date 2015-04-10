@@ -71,23 +71,20 @@ popd
 
 # install ruby versions
 if [ "${RUBY_VERS}" == "" ]; then
-rbenv install ${RUBY_VER}
+  rbenv install ${RUBY_VER}
+  gem update --system
+  gem install bundler --no-rdoc --no-ri
 else
   for v in ${RUBY_VERS} ; do
     rbenv install $v
+    gem update --system
+    gem install bundler --no-rdoc --no-ri
   done
 fi
 rbenv global ${RUBY_VER}
 
 # Rehash:
 rbenv rehash
-
-ruby -v
-gem update --system
-gem -v
-gem install bundler --no-rdoc --no-ri
-bundle -v
-
 
 apt-get -y remove \
   bison \
