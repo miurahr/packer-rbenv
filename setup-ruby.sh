@@ -29,6 +29,7 @@ else
   echo "default version is ${RUBY_VER}."
 fi
 
+source /etc/profile.d/rbenv.sh
 
 ##########################################
 # install ruby versions
