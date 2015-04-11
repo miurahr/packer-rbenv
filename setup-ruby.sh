@@ -36,8 +36,7 @@ env DEBIAN_FRONTEND=noninteractive apt-get update
 env DEBIAN_FRONTEND=noninteractiv apt-get -y install \
   build-essential \
   curl \
-  unzip \
-  git-core \
+  ca-certificates \
   gcc \
   g++ \
   make \
@@ -68,9 +67,12 @@ install_ruby_version () {
 
   rbenv install $ver
   rbenv global $ver
-  gem update --system
+  gem update --system --no-document
   gem install bundler --no-rdoc --no-ri
 }
+
+echo "gem: --no-document" > /etc/gemrc
+echo "gem: --no-document" > /root/.gemrc
 
 # install ruby versions
 if [ "${RUBY_VERS}" == "" ]; then
@@ -94,11 +96,17 @@ rbenv rehash
 # cleanup
 #
 env DEBIAN_FRONTEND=noninteractive apt-get -y remove \
-  bison \
   libgdbm-dev \
   libncursesw5-dev \
   libncurses5-dev \
   libreadline6-dev \
+  build-essential \
+  curl \
+  ca-certificates \
+  gcc \
+  g++ \
+  make \
+  bison \
   tcl8.5-dev \
   tk8.5-dev \
   zlib1g-dev \
