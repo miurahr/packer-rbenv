@@ -29,6 +29,32 @@ else
   echo "default version is ${RUBY_VER}."
 fi
 
+##########################################
+# dependencies
+#
+env DEBIAN_FRONTEND=noninteractive apt-get update
+env DEBIAN_FRONTEND=noninteractiv apt-get -y install \
+  build-essential \
+  curl \
+  unzip \
+  git-core \
+  gcc \
+  g++ \
+  make \
+  bison \
+  libgdbm-dev \
+  libncursesw5-dev \
+  libncurses5-dev \
+  libreadline6-dev \
+  tcl8.5-dev \
+  tk8.5-dev \
+  zlib1g-dev \
+  libssl-dev \
+  procps \
+  libffi-dev \
+  libyaml-dev \
+  chrpath
+
 source /etc/profile.d/rbenv.sh
 
 ##########################################
