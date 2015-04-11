@@ -6,6 +6,9 @@ set -e
 #  You can use it by sourcing /etc/profile.d/rbenv.sh from your login shell.
 #
 
+# part1: install ruby versions and cleanup
+
+
 # Environment variable for building
 #
 # if RUBY_VERS is not empty, it build all of RUBY versions.
@@ -26,53 +29,6 @@ else
   echo "default version is ${RUBY_VER}."
 fi
 
-##########################################
-# dependencies
-#
-env DEBIAN_FRONTEND=noninteractive apt-get update
-env DEBIAN_FRONTEND=noninteractiv apt-get -y install \
-  build-essential \
-  curl \
-  unzip \
-  git-core \
-  gcc \
-  g++ \
-  make \
-  bison \
-  libgdbm-dev \
-  libncursesw5-dev \
-  libncurses5-dev \
-  libreadline6-dev \
-  tcl8.5-dev \
-  tk8.5-dev \
-  zlib1g-dev \
-  libssl-dev \
-  procps \
-  libffi-dev \
-  libyaml-dev \
-  chrpath
-
-##########################################
-# install rbenv
-#
-git clone https://github.com/sstephenson/rbenv.git /opt/rbenv
-
-# Add rbenv to the path:
-echo '# rbenv setup' > /etc/profile.d/rbenv.sh
-echo 'export RBENV_ROOT=/opt/rbenv' >> /etc/profile.d/rbenv.sh
-echo 'export PATH="$RBENV_ROOT/bin:$PATH"' >> /etc/profile.d/rbenv.sh
-echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
-
-chmod +x /etc/profile.d/rbenv.sh
-source /etc/profile.d/rbenv.sh
-
-##########################################
-# Install ruby-build:
-pushd /tmp
-  git clone git://github.com/sstephenson/ruby-build.git
-  cd ruby-build
-  ./install.sh
-popd
 
 ##########################################
 # install ruby versions
@@ -105,14 +61,6 @@ rbenv global ${RUBY_VER}
 
 # Rehash:
 rbenv rehash
-
-
-############################################
-# plugins
-#
-# rbenv-sudo
-mkdir /opt/rbenv/plugins
-git clone git://github.com/dcarley/rbenv-sudo.git /opt/rbenv/plugins/rbenv-sudo
 
 
 ###########################################

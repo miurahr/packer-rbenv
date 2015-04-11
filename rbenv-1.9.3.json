@@ -6,7 +6,7 @@
   "builders": [
     {
         "type": "docker",
-        "image": "ubuntu:14.04.2",
+        "image": "miurahr/rbenv-base",
         "commit": true,
         "pull": true
     }
@@ -16,7 +16,7 @@
     {
       "type": "shell",
       "environment_vars": [ "RUBY_VER={{ user `ruby_version`}}" ],
-      "script": "setup-rbenv-base.sh"
+      "script": "setup-ruby.sh"
     }
   ],
 
