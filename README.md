@@ -51,7 +51,7 @@ OR
 
 ```
 $ git checkout master
-$ docker build -t rbenv .
+$ docker build -t rbenv:latest .
 $ git checkout docker-1.9.3
 $ docker build -t rbenv:1.9.3-p551 .
 $ git checkout docker-2.2.1
