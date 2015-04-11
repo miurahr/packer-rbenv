@@ -68,9 +68,12 @@ install_ruby_version () {
 
   rbenv install $ver
   rbenv global $ver
-  gem update --system
+  gem update --system --no-document
   gem install bundler --no-rdoc --no-ri
 }
+
+echo "gem: --no-document" > /etc/gemrc
+echo "gem: --no-document" > /root/.gemrc
 
 # install ruby versions
 if [ "${RUBY_VERS}" == "" ]; then
