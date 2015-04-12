@@ -66,7 +66,7 @@ source /etc/profile.d/rbenv.sh
 install_ruby_version () {
   local ver=$1
 
-  rbenv install $ver --keep
+  rbenv install $ver
   rbenv global $ver
   gem update --system --no-document
   gem install bundler --no-rdoc --no-ri
