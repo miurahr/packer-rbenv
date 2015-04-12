@@ -45,6 +45,7 @@ env DEBIAN_FRONTEND=noninteractiv apt-get -y install \
   libncursesw5-dev \
   libncurses5-dev \
   libreadline6-dev \
+  libcxxtools-dev \
   tcl8.5-dev \
   tk8.5-dev \
   zlib1g-dev \
@@ -65,7 +66,7 @@ source /etc/profile.d/rbenv.sh
 install_ruby_version () {
   local ver=$1
 
-  rbenv install $ver
+  rbenv install $ver --keep
   rbenv global $ver
   gem update --system --no-document
   gem install bundler --no-rdoc --no-ri
