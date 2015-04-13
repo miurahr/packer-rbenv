@@ -8,7 +8,9 @@ Ruby versions
 --------------
 
 * Ruby 1.9.3 p551
+* Ruby 1.9.3 p484
 * Ruby 2.0.0 p643
+* Ruby 2.0.0 p598
 * Ruby 2.1.5
 * Ruby 2.2.1
 
@@ -21,17 +23,39 @@ You can get the image that includes specified ruby version.
 $ docker pull miurahr/rbenv:2.2.1
 ```
 
-You can get the image that includes all stable ruby versions.(latest tag default)
+You can get the image that includes all stable ruby versions.
+include
+
+* old stable 2.0.0p643
+* previous stable 2.1.5
+* current stable 2.2.1
 
 ```
-$ docker pull miurahr/rbenv:stables
+$ docker pull miurahr/rbenv:latest
 ```
+
+before using ruby in docker guest, please include rbenv by
+
+```
+source /etc/profile.d/rbenv
+```
+
 
 Directories and files
 ----------------------
 
 * /opt/rbenv  -  git cloned  rbenv
 * /etc/profile.d/rbenv.sh - activate rbenv for all shell sessions
+
+
+Branches
+---------------------
+
+Master branch has all packer configurations and Dockerfile 
+that is configured to install all stable versions.
+
+versions branch has commits and tags that is configured to 
+install specific ruby version in each.
 
 
 How to build
@@ -52,9 +76,9 @@ OR
 ```
 $ git checkout master
 $ docker build -t rbenv:latest .
-$ git checkout docker-1.9.3
+$ git checkout 1.9.3-p551
 $ docker build -t rbenv:1.9.3-p551 .
-$ git checkout docker-2.2.1
+$ git checkout 2.2.1
 $ docker build -t rbenv:2.2.1 .
 ```
 
