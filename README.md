@@ -1,6 +1,8 @@
 packer-rbenv
 =============
 
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=miurahr&url=https://github.com/miurahr/packer-rbenv)
+
 Rbenv base template for Ruby application development
 
 
